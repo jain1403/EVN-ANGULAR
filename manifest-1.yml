@@ -1,0 +1,9 @@
+---
+applications:
+  - name: pd-apm-seed-micro-app
+    host: pd-apm-seed-micro-app
+    path: ./pd-apm-seed-micro-app-1.0.0-SNAPSHOT.zip
+    domain: run.asv-pr.ice.predix.io
+    buildpack: https://github.com/cloudfoundry/buildpack-nodejs.git
+    memory: 1G
+    disk_quota: 1G

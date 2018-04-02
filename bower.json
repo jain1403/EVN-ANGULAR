@@ -1,0 +1,25 @@
+{
+  "name": "mybootstrap",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    " "
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "footable": "^3.1.4",
+    "lodash": "^4.17.4",
+    "highcharts": "^5.0.12",
+    "ng-table": "^4.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.10",
+    "angularjs-dropdown-multiselect": "^1.11.8",
+    "es6-promise-polyfill": "^1.2.0",
+    "es6-promise": "^4.1.1"
+  }
+}

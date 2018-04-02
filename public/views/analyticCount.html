@@ -1,0 +1,191 @@
+<style>
+ #dashboardDiv {
+	background: linear-gradient(to right, #284069, #5b3e67) ! important;
+} 
+
+.chartLabel {
+	text-align: center;
+	color: white;
+	padding-top: 5px;
+	border-bottom: 2px solid #5f9ea0;
+	padding-bottom: 5px;
+}
+
+#section-1,#section-2 {
+	display: inline-flex;
+	margin-left: 9px;
+}
+
+#overallDiv,#assetDiv,#systemDiv,#subSystemDiv,#assetCoverageDiv {
+	display: inline-block;
+	border: 2px solid #959dd2;
+	border-radius: 5px;
+	margin-right: 5px;
+	margin-top: 10px;
+	width: 100%;
+}
+
+#assetDiv1,#assetDiv2 {
+	display: inline-block;
+	border: 2px solid #959dd2;
+	border-radius: 5px;
+	margin-right: 5px;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.expandIcon {
+	color: white;
+	float: right;
+	padding: 5px;
+	font-size: 18px;
+}
+.headingContent div{
+float: left;
+}
+button.btn {
+background: #3269c5;
+    line-height: 1;
+}
+button.btn:hover {
+color:white;
+}
+.countTable{
+color: white;
+vertical-align: middle;
+}
+.countTable th, .countTable td{
+vertical-align: middle;
+color:black;
+border: 1px solid #b4b4bb;
+}
+.countTable tbody tr:hover{
+    background: #82a7a7;
+}
+.countTable tbody tr{
+    height: 2.5rem;
+}
+    
+.countTable thead{
+    background: #368486;
+}
+.countTable thead tr th{
+    color: white;
+}
+.countTable thead tr th{
+    padding-left: 2.5rem;
+}
+.countTable thead tr th:nth-child(1){
+    background: #258EA4;
+}
+.countTable thead tr th:nth-child(2){
+    background: #617D88;
+}
+.countTable thead tr th:nth-child(3){
+    background: #04BAD7;
+}
+.countTable thead tr th:nth-child(4){
+    background: #019788;
+}
+.countTable thead tr th:nth-child(5){
+    background: #52AD4D;
+}
+.countTable thead tr th:nth-child(6){
+    background: #BFD11D;
+}
+
+.countTable tbody tr td:nth-child(1){
+    background: #D0E6E6;
+}
+.countTable tbody tr td:nth-child(2){
+    background: #BCC7CD;
+}
+.countTable tbody tr td:nth-child(3){
+    background: #8ADDF1;
+}
+.countTable tbody tr td:nth-child(4){
+    background: #7AD6CD;
+}
+.countTable tbody tr td:nth-child(5){
+    background: #AFE0B3;
+}
+.countTable tbody tr td:nth-child(6){
+    background: #EBF2A1;
+}
+.tableDiv{
+    margin: 3% 3% 0% 1%;
+    border-radius: 2px;
+}
+#scoreCardLabel{
+color: white;
+}
+
+</style>
+<div id="dashboardDiv" ng-style="dashboardSection">
+<div class="headingContent" style="padding: 15px 0px 10px 25px;color: white;font-size: 20px;">
+	<div style="padding-right: 13px;">
+		<i class="fa fa-arrow-left backButton" ng-click="backToMain()" aria-hidden="true"></i>
+	</div>
+	<div style="width: 50%">Analytics Dashboard - {{fuelNameSelected}}</div>
+	<div style="width: 44%;text-align: right;"><button id="scoreCardLabel" class="btn" ng-click="showCount()">Score Card</button></div>
+</div>
+<div class="chartContent" ng-show="!showCard">
+<div id="section-1">
+	<div id="overallDiv">
+		<i class="fa fa-expand expandIcon" ng-show="expandTrue"  aria-hidden="true"></i>
+		<i class="fa fa-compress expandIcon" ng-show="!expandTrue" aria-hidden="true"></i>
+		<div class="chartLabel">APM Analytics Overall Coverage</div>
+		<div id="overall"></div>
+	</div>
+	<div id="assetDiv1">
+		<i class="fa fa-expand expandIcon" ng-show="expandTrue"  aria-hidden="true"></i>
+		<i class="fa fa-compress expandIcon" ng-show="!expandTrue" aria-hidden="true"></i>
+		<div class="chartLabel">Coverage Breakdown by Asset</div>
+		<div id="asset"></div>
+	</div> 
+</div>
+<div id="section-2">
+	
+	<div id="systemDiv" class="chart-container">
+		<i class="fa fa-expand expandIcon" ng-show="expandTrue"  aria-hidden="true"></i>
+		<i class="fa fa-compress expandIcon" ng-show="!expandTrue" aria-hidden="true"></i>
+		<div class="chartLabel">{{assetNameSelected1}} Coverage Breakdown</div>
+		<div id="system" class="chart"></div>
+	</div>
+	<div id="subSystemDiv">
+		<i class="fa fa-expand expandIcon" ng-show="expandTrue"  aria-hidden="true"></i>
+		<i class="fa fa-compress expandIcon" ng-show="!expandTrue" aria-hidden="true"></i>
+		<div class="chartLabel" style="padding-bottom: 2px;">{{systemNameSelected1 }} Coverage Breakdown</div>
+		<div id="subSystem"></div>
+	</div>
+</div>
+</div>
+<div class="tableDiv" ng-show="showCard">
+
+	<table class="countTable">
+		<thead>
+			<tr>
+				<th>Asset</th>
+				<th>System</th>
+				<th>Sub-System</th>
+				<th>Components</th>
+				<th>Failure Mode</th>
+				<th>Analytics</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="count in count">
+				<td>{{count.assetName}}</td>
+				<td>{{count.systemCount}}</td>
+				<td>{{count.subSystemCount}}</td>
+				<td>{{count.componentCount}}</td>
+				<td>{{count.failureCount}}</td>
+				<td>{{count.analyticCount}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+
+</div>

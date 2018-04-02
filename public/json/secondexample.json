@@ -1,0 +1,47 @@
+{
+  "id": "firstLevel",
+  "name": "Gass Turbine",
+  "data": {},
+  "children": [
+    {
+      "id": "secondLevel",
+      "name": "addtional info 1",
+      "data": {},
+      "children": [
+        {
+          "id": "thirdLevel",
+          "name": "additional info 1.1",
+          "data": {},
+          "children": [
+            {
+              "id": "fourthLevel",
+              "name": "additional info 1.2",
+              "data": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "firstLevel2",
+          "name": "Nuclear Turbine",
+          "data": {},
+          "children": [
+            {
+              "id": "secondLevel2",
+              "name": "additional info 2",
+              "data": {},
+              "children": [
+                {
+                  "id": "thirdLevel2",
+                  "name": "additional info 2.1",
+                  "data": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

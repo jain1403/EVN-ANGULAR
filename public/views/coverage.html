@@ -1,0 +1,81 @@
+ <style>
+.nav-sm .left-col {
+	width: 50px;
+}
+
+.nav-sm .right-col {
+	/* margin-left: 50px; */
+}
+
+.nav-md .left-col {
+	 width: 230px; 
+}
+
+.nav-md .right-col {
+	/* margin-left: 200px; */
+}
+
+.navBarItems {
+	padding: 12px 0px 12px 15px;
+	    cursor: pointer;
+}
+
+.side-menu {
+	padding-top: 10px;
+}
+
+.left-col {
+	background-color: black;
+	/* position: fixed; */
+	color: white;
+	bottom: 0px;
+	top: 64px;
+	padding: 15px 0px 0px 0px;
+	transition: all 0.3s ease-in;
+}
+
+.menuLabel {
+	padding-left: 2px;
+}
+
+.fa-lg {
+	font-size: 1.5em;
+}
+
+.right-col {
+	position: relative;
+	float: left;
+	transition: all 0.3s ease-in;
+}
+
+.tooltip {
+	/* color: black;
+	background: white; */
+	z-index: 100000000 ! important;
+	
+
+}
+</style>
+ 
+ 	<div class="content" ng-class="{'nav-md':isOpen,'nav-sm':!isOpen}" ng-app="" style="display: flex;">
+	  <div class="left-col">
+		<span style="font-size: 25px;padding-left: 10px;" ng-click="toggleSideMenu()"><i class="fa fa-bars toggleBtn"></i></span>
+		<ul class="nav side-menu" ng-repeat="item in menuItems">
+			<li tooltip="item.tooltip" class="item" id="{{item.itemId}}" ng-click="gotoState(item)" ng-class="{'active-parent-class':currentParent==item.itemId}">
+				<div class="navBarItems">
+				<i class="fa {{item.icon}}"></i>
+				<span class="menuLabel" ng-if="isOpen">{{item.label}}</span>
+					  	<ul class="child" ng-show="expandParent==item.itemId">
+							<li class='child-item' ng-repeat="obj in item.subMenu" ng-click="gotoState(obj,true,$event)" ng-class="{'active-child-class':currentChild==obj.itemId}">
+								<!-- <i class="fa {{obj.icon}}"></i> -->
+								<span ng-if="isOpen">{{obj.label}}</span>
+							</li>
+						</ul>
+			  	</div>
+			</li>
+		</ul>
+	  </div>
+	  <div id="mainView" class="right-col" ng-style="viewStyle" >
+		  <ui-view></ui-view>
+	  </div>
+	</div>

@@ -1,0 +1,72 @@
+ <style>
+#analyticTableDiv {
+	overflow-y: auto;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ui-grid-menu-button {
+	height: 30px ! important;
+}
+
+input.ui-grid-filter-input[type="text"] {
+	height: 20px ! important;
+	min-height: inherit;
+	border-radius: 15px ! important;
+	padding: 12px ! important;
+	font-size: 15px ! important;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+
+.chartFilter {
+	border: 1px solid #2f8eb3;
+	border-radius: 15px;
+	padding: 4px;
+	background: #2f8eb3;
+}
+
+.clearFilter {
+	margin-right: 0.2em;
+	cursor: pointer;
+	border: 1px solid #2f3133;
+	border-radius: 15px;
+	padding: 4px;
+	background: #2f3133;
+	color: white !important;
+	text-decoration: none ! important;
+}
+</style> 
+ 
+<div id="searchDiv" style="display:flex;padding-bottom: 12px;padding-left: 5px;">
+<div class="heading" style="flex:1;font-size: 25px;"><span style="padding-right: 12px;padding-left: 10px;"><i ng-show="backButton" style="cursor: pointer;" class="fa fa-arrow-left backButton" ng-click="backToMainfrmPipeline()" aria-hidden="true"></i></span>Analytics Pipeline</div>
+<div style="flex:1; padding-top: 12px;padding-right: 17px;text-align: right; ">Search:&nbsp<input ng-model="searchText" ng-change="refreshData()"></div>
+</div>
+
+<div style="padding-bottom: 10px;" ng-if="filterSelected">
+<span style="font-weight: bold;padding-left: 1%;font-size: 17px;">Filter:&nbsp</span>
+<span class="chartFilter" ng-if="!fuelSelected"><a style="color: white;text-decoration: none;"><span style="padding-right: 4px;">{{filterFuelName}}</span><span><i ng-click="clearFuel()" style="cursor: pointer;" class="fa fa-times" aria-hidden="true"></i></span></a></span>
+<span class="" ng-if="!assetSelected"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+<span class="chartFilter" ng-if="!assetSelected"><a style="color: white;text-decoration: none;"><span style="padding-right: 4px;">{{filterassetName}}</span><span><i ng-click="clearAsset()" style="cursor: pointer;" class="fa fa-times" aria-hidden="true"></i></span></a></span>
+<span style="float: right;padding-right: 18px;"><a class="clearFilter" ng-if="!fuelSelected" ng-click="clearFilter()"><span style="padding-right: 4px;">Clear Filter</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+</div>
+<div ng-class="backlogTableLoadstyle">
+<div ui-grid="gridOptions" ui-grid-exporter ui-grid-auto-resize style="height: {{gridHeight}}px" class="grid1"></div>
+</div>
+
+

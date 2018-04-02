@@ -1,0 +1,202 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-04-20T04:08:08Z",
+    "title": "AnalyticsTaxonomy"
+  },
+  "host": "2yk5vaw7n0.execute-api.us-west-2.amazonaws.com",
+  "basePath": "/dev",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/analytics-taxonomy-get-assets": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            },
+            "headers": {
+              "Connection": {
+                "type": "string"
+              },
+              "Content-Length": {
+                "type": "string"
+              },
+              "Content-Type": {
+                "type": "string"
+              },
+              "Date": {
+                "type": "string"
+              },
+              "via": {
+                "type": "string"
+              },
+              "X-Amz-Cf-Id": {
+                "type": "string"
+              },
+              "X-Amzn-Trace-Id": {
+                "type": "string"
+              },
+              "X-Cache": {
+                "type": "string"
+              },
+              "x-amzn-RequestId": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-request-validator": "Validate query string parameters and headers",
+        "x-amazon-apigateway-integration": {
+          "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole",
+          "responses": {
+            "default": {
+              "statusCode": "200",
+              "responseParameters": {
+                "method.response.header.operator": "integration.response.body.op",
+                "method.response.header.operand_2": "integration.response.body.b",
+                "method.response.header.operand_1": "integration.response.body.a"
+              },
+              "responseTemplates": {
+                "application/json": "#set($res = $input.path('$'))\n{\n    \"result\": \"$res.a, $res.b, $res.op => $res.c\",\n  \"a\" : \"$res.a\",\n  \"b\" : \"$res.b\",\n  \"op\" : \"$res.op\",\n  \"c\" : \"$res.c\"\n}"
+              }
+            }
+          },
+          "uri": "https://2yk5vaw7n0.execute-api.us-west-2.amazonaws.com/dev/analytics-taxonomy-get-assets",
+          "passthroughBehavior": "when_no_match",
+          "httpMethod": "GET",
+          "requestTemplates": {
+            "application/json": "{\n    \"a\":  \"$input.params('kpi')\",\n    \"b\":  \"$input.params('operand2')\", \n    \"op\": \"$input.params('asset')\"   \n}"
+          },
+          "type": "aws"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Body": {
+      "type": "object",
+      "properties": {
+        "assetMasterId": {
+          "type": "number"
+        },
+        "assetName": {
+          "type": "string"
+        },
+        "systemMasterId": {
+          "type": "number"
+        },
+        "systemId": {
+          "type": "number"
+        },
+        "subSystemMasterId": {
+          "type": "number"
+        },
+        "subSystemId": {
+          "type": "number"
+        },
+        "subSystemName": {
+          "type": "string"
+        },
+        "compMasterId": {
+          "type": "number"
+        },
+        "compName": {
+          "type": "string"
+        },
+        "failureMasterId": {
+          "type": "number"
+        },
+        "failureName": {
+          "type": "string"
+        },
+        "assetId": {
+          "type": "number"
+        },
+        "apmAnalytics": {
+          "type": "boolean"
+        },
+        "analyticCoverage": {
+          "type": "string"
+        },
+        "analyticCoverageMnD": {
+          "type": "string"
+        },
+        "analyticCoverageSS": {
+          "type": "string"
+        },
+        "analyticCoverageCatelog": {
+          "type": "string"
+        },
+        "backlogMasterId": {
+          "type": "array"
+        },
+        "backlogName": {
+          "type": "array"
+        },
+        "backlogDesc": {
+          "type": "array"
+        },
+        "backlogCount": {
+          "type": "number"
+        },
+        "outages": {
+          "type": "number"
+        },
+        "mwh": {
+          "type": "number"
+        },
+        "hrs": {
+          "type": "number"
+        },
+        "rpn": {
+          "type": "number"
+        },
+        "businessValue": {
+          "type": "number"
+        },
+        "analyticCount": {
+          "type": "number"
+        },
+        "compId": {
+          "type": "number"
+        },
+        "failureId": {
+          "type": "number"
+        },
+        "noHistEvent": {
+          "type": "number"
+        }
+      },
+      "title": "Body"
+    },
+    "Result": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Body"
+        }
+      },
+      "title": "Result"
+    }
+  },
+  "x-amazon-apigateway-request-validators": {
+    "Validate body": {
+      "validateRequestParameters": false,
+      "validateRequestBody": true
+    },
+    "Validate query string parameters and headers": {
+      "validateRequestParameters": true,
+      "validateRequestBody": false
+    }
+  }
+}

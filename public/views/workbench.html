@@ -1,0 +1,197 @@
+<div class="col-md-12 col-sm-12 col-xs-12 no_pad">
+     <div class="col-xs-12 no_pad">
+           <div class="col-xs-12 border-box p10 bR10 white-bg" >
+                 <table class="customeTable table table-striped table-bordered table-condensed " ng-table="analyticTable" show-filter="true">
+                        <tbody>
+                              <tr ng-repeat-start="item in $data track by $index" ng-class="{'selectedBg_light':minimized===item.analytic_id}">
+                              		<td data-title="'#No'">
+                              			<span ng-if="!minimized">{{item.analytic_id}}</span>
+										<span ng-if="minimized===item.analytic_id" ng-click="row_Toggle(analytic.analytic_id)"><img src="./images/details_close.png"></img></span>
+									</td>
+                                    <td class="small-desc" data-title="'Analytic Name'" filter="{ 'analytic_name': 'text' }" sortable="'analytic_name'"><a ng-click="showArtifacts(item.analytic_id)">{{item.analytic_name}}</a></td>
+                                    <td data-title="'Analytic Description'" filter="{ analyitic_desc: 'text'}" class="desc"  mndtooltip="{{item.analyitic_desc}}">
+										{{item.analyitic_desc}}</td>
+									<td data-title="'Applicability'" filter="{ applicability_desc: 'text'}"  class="desc" mndtooltip="{{item.applicability_desc}}">
+										{{item.applicability_desc || "NO DATA"}}</td>
+									<td data-title="'Documentation'" filter="{ doc_details: 'text'}" class="desc" >
+										<span ng-click="downloadWord(item.doc_details)" ng-if="item.doc_details"><a href="javascript:void(0);"><i class="fa fa-file-word-o mR5"></i>{{item.doc_details.substring(item.doc_details.lastIndexOf('/')+1,item.doc_details.length)}}</a></span>
+										<span ng-if="!item.doc_details">NA</span></td>
+									<td data-title="'Platform'" class='center_align' filter="{ platform: 'text'}">
+										{{item.platform}}</td>
+									<td data-title="'Run Status'" style="width:10%">
+                                    	<span ng-class="item.execute[0].status?item.execute[0].status:'gray_clr'"  mndtooltip='{{item.execute[0].status || "Not Started"}}'><i class="fa fa-flag small_icon"></i><span class="mL5">{{item.execute[0].status || "Not Started"}}</span></span>
+                                    	<span ng-if="item.execute[0].status=='FAILED'" mndtooltip="Download Logs"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+                                    </td>
+                                    <td data-title="'Run Action'" class="center_align" >
+                                        <span ng-if="item.execute[0].status!='PROCESSING'" class="mR5" mndtooltip="Run Analytic" mndtooltip-direction="left"><i class="fa fa-play-circle green_clr" aria-hidden="true" ng-click="runAnalytic(item)"></i></span>
+                                    	<span ng-if="item.execute[0].status=='PROCESSING'">
+											<span title="Refresh the results" ng-click="fetchCatalogStatus(item.execute[0].action_id,'execute')"><i class="fa fa-refresh fa-3x fa-fw" ng-class="spinId==item.execute[0].action_id?'fa-spin':''"></i></span>
+										</span>
+                                    </td>
+                                    <td data-title="'Validate Status'">
+                                    	<span ng-class="item.validate[0].status?item.validate[0].status:'gray_clr'" mndtooltip='{{item.validate[0].status || "Not Started"}}'><i class="fa fa-flag small_icon"></i><span class="mL5">{{item.validate[0].status || "Not Started"}}</span></span>	
+                                    </td>
+                                    <td data-title="'Validate Action'" class="center_align">
+                                    	<span ng-if="item.execute[0].status=='COMPLETED' && (item.validate[0].status=='' || emptyCheck(item.validate))">
+                                    		<span class="mR5" mndtooltip="Validate Analytic" mndtooltip-direction="left"><i class="glyphicon glyphicon-list-alt gray_clr" aria-hidden="true" ng-click="openValidationDialog(item.analytic_name,item.version,item.analytic_id)"></i></span>
+											<!-- <span mndtooltip="History"><i class="fa fa-history" aria-hidden="true"  ng-click="allValidationHistory(item.analytic_id)"></i></span> -->
+                                    	</span>
+                                    	<span ng-if="item.execute[0].status!='COMPLETED'">
+                                    		<i ng-if="item.execute[0].status=='FAILED'" mndtooltip="Validation Failed" class="fa fa-exclamation-triangle red_clr" aria-hidden="true"></i>
+                                    		<i ng-if="item.execute[0].status!='FAILED'" mndtooltip="Analytic execution was pending." class="fa fa-exclamation-triangle yellow_clr" aria-hidden="true"></i>
+                                    	</span>
+                                    	
+                                    	<span ng-if="item.validate[0].status==='COMPLETED'">
+											<button class="btn btn-info btn-sm extraSmallBtn" ng-click="viewValidationReport(item.validate[0].action_id,item.analytic_name)">View Details</button>
+										</span>
+										<span ng-if="item.execute[0].status=='COMPLETED' && !emptyCheck(item.validate) && item.validate[0].status=='PROCESSING' ">
+											<span title="Refresh the results" ng-click="fetchCatalogStatus(item.validate[0].action_id,'validate')"><i class="fa fa-refresh fa-3x fa-fw" ng-class="spinId==item.validate[0].action_id?'fa-spin':''"></i></span>
+										</span>
+                                    </td>
+                              </tr>
+                              <tr ng-repeat-end ng-show="analyticTableModel[item.analytic_id]" ng-class="{'selectedBg_light':minimized===item.analytic_id}">
+                             	<td colspan="11" style="padding: 10px !important;" class="animateRight">
+									<div ng-if="!historyPresent" class="no-table-data">No Data Available</div>
+									<div ng-if="historyPresent">
+										<div ng-if="historyData=='artifacts'">
+											<div class="inner-table">
+												<div class="inner-title">Analytic Artifacts</div>
+												<table ng-table="artifactTable" class="table table-striped small-pagination table-bordered" show-filter="false">
+													<tr ng-repeat="artifact in $data track by $index">
+														<td data-title="'No.'">{{$index+1}}</td>
+														<td data-title="'File Name'" filter="{ 'name': 'text' }" sortable="'name'">{{artifact.name}}</td>
+														<td data-title="'Type'" filter="{ 'type': 'text' }" sortable="'type'">{{artifact.type}}</td>
+														<td class="desc" data-title="'Description'" filter="{ 'description': 'text' }" mndtooltip="{{artifact.description}}">{{artifact.description}}</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+                              	</td>
+                              </tr>
+                        </tbody>
+                  </table>
+           </div>
+     </div>
+</div>
+<div class="overlay" ng-show="bulkValidate">
+	<div class="popup pop_md bulkValidatePopup animate" style="display: block;">
+		<div class="popup-head">
+		  <span>Validation</span>
+		  <i class="fa fa-close pull-right" ng-click="bulkValidate=false"></i>
+		</div>
+		<div class="popup-content">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="subHeadpop">Please select Actual and expected output file to proceed.</div>
+				<!-- <div ng-if="bulkData"> -->
+					<div class="col-md-12 col-sm-12 col-xs-12 no_pad" ng-repeat="(key,obj) in bulkData">
+						<div class="panel panel-default mB0">
+							<div class="panel-heading pointerSelect" >
+								<h4 class="panel-title">
+								  <a>{{key}}</a>
+								  <!-- <i class="fa fa-angle-double-down pull-right" aria-hidden="true" ng-class="{'fa-angle-double-down':!bulkModel[key],'fa-angle-double-up':bulkModel[key]}"></i> -->
+								</h4>
+							</div>
+							<div  class="panel-collapse">
+								<div class="panel-body h0">
+									<div class="col-xs-12">
+										<div class="col-xs-12 row-eq-height no_pad">
+											<div class="col-xs-6 expected-files">
+												<div class="big_head">Expected Output
+													<span class="pull-right pointerSelect" title="download selected file" ng-click="download_selected('EXPECTED')" ng-show="formModel['expected_file_'+key]"><i class="fa fa-download" aria-hidden="true" ></i></span>
+												</div>
+												<form class="overflowClass">
+													<ul class="noList" id="expected_file">
+														<li  ng-repeat="list in obj.OUTPUT.files track by list.filePath" ng-click="changeFilePath('EXPECTED',list.filePath);changeBulkData('OUTPUT',list.filePath,key)" class="ellipsisText " title="{{list.file}}">
+															<input type="radio" ng-model="formModel['expected_file_'+key]"  name="{{key}}_OUTPUT" id="{{list.filePath}}" value="{{list.file}}" class="pointerSelect">
+															<label for="{{list.filePath}}" class="pointerSelect">{{list.file}}</label>
+														</li>
+													</ul>
+												</form>
+											</div>
+											<div class="col-xs-6 actual-files">
+												<div class="big_head">Actual Output (OM Lite AWS)
+													<span class="pull-right pointerSelect" title="download selected file" ng-click="download_selected('ACTUAL')" ng-show="formModel['actual_file_'+key]"><i class="fa fa-download" aria-hidden="true"></i></span>
+												</div>
+												<form class="overflowClass">
+													<ul class="noList" id="actual_file">
+														<li  ng-repeat="list in obj.ACTUAL_OUTPUT.files track by list.filePath" ng-click="changeFilePath('ACTUAL',list.filePath);changeBulkData('ACTUAL_OUTPUT',list.filePath,key)" class="ellipsisText" title="{{list.file}}">
+															<input type="radio" ng-model="formModel['actual_file_'+key]"  name="{{key}}_ACTUAL_OUTPUT" id="{{list.filePath}}" value="{{list.file}}" class="pointerSelect">
+															<label for="{{list.filePath}}" class="pointerSelect">{{list.file}}</label>
+														</li>
+													</ul>
+												</form>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				<!-- </div> -->
+			</div>
+			<div class="col-xs-12 bulkvalidateBtn">
+				<button type="button" class="btn btn-primary btn-md" ng-click="validateBulkData()" ng-disabled="bulk_enable_flag">
+				<!-- <button type="button" class="btn btn-primary btn-md" ng-click="openAlert('The validation module is in progress. It will be available soon.')" ng-disabled="bulk_enable_flag"> -->
+					Validate 
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="overlay" ng-show="validationReport_popup">
+	<div class="popup pop_lg animate" style="display: block;">
+		<div class="popup-head">
+		  <span>Validation Result of {{_resultValidate_new}} : {{dataPercent}} %</span>
+		  <i class="fa fa-close pull-right" ng-click="validationReport_popup=false"></i>
+		</div>
+		<div class="popup-content" ng-class="{'scroll_check':validationReport}">
+			<div ng-if="validationReport" class="col-xs-12">
+				<table class="myTable validate table-bordered popupTable no-comment">
+					<thead>
+					<tr>
+						<th style="text-align:center; font-size: 15px;">Column Name</th>
+						<th style="text-align:center;    font-size: 15px;">Percentage Match</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat-start="obj in validationReport"  ng-class-odd="'odd'">
+							<td ng-class="{'selectedBg':validateTableRow[obj.name]}">{{obj.name}}</td>
+							<td ng-class="{'selectedBg':validateTableRow[obj.name]}">{{obj.match}}<span class="pull-right" ng-show="obj.match<100" ng-click="report_row_Toggle(obj.name)" ng-class="{'plusIcon':!validateTableRow[obj.name],'minusIcon':validateTableRow[obj.name]}"></i></span></span></td>
+						</tr>
+						<tr ng-repeat-end ng-if="obj.mismatch" ng-show="validateTableRow[obj.name]">
+							<td colspan="2" style="padding:10px !important;text-align:right !important">
+								 <span class="fa-stack fa-sm downloadIcon pointerSelect" title="Download these details." ng-click="createFileToDownload(obj.name)">
+									<i class="fa fa-square-o fa-stack-2x"></i>
+									<i class="fa fa-download fa-stack-1x"></i>
+								</span>
+								<table class="table-bordered innerRow">
+									<thead>
+										<tr>
+											<th style="text-align:center">Date Time</th>
+											<th style="text-align:center">AWS</th>
+											<th style="text-align:center">CCAP</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="item in obj.mismatch.AWS_Val track by $index">
+											<td>{{obj.mismatch.DATETIME[$index]}}</td>
+											<td>{{obj.mismatch.AWS_Val[$index]}}</td>
+											<td>{{obj.mismatch.CCAP_Val[$index]}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			<div ng-if="validationReport?false:true">
+				<div class="p10">No Data Available</div>
+			</div>
+		</div>
+	</div>
+</div>

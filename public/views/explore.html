@@ -1,0 +1,18 @@
+<section id="explore" style="overflow:hidden; position: relative;">
+    <!--<h2 class="-font--sans">Digital Twins for Power &amp; Utilities</h2>-->
+    <!--<a ui-sref="catalog"><button class="ex-get-started ge-button -fill--solid -color--blue">LET'S EXPLORE</button></a>-->
+	<div webgl-content>
+		<web-gl-directive></web-gl-directive>
+		<div class="UnityWindowHalfGas" style="display:none; overflow-y:scroll; background-color:#dedede; float:left;position:fixed;">
+			<unity-catalog-gas-directive template-url="views/catalog.html" componentid="" componentname="" fuelid="2" fuelname="Gas">
+			
+			</unity-catalog-gas-directive>
+		</div>
+		<div class="UnityWindowHalfTransmission" style="display:none; overflow-y:scroll; background-color:#dedede; float:left; position:fixed;">
+			<unity-catalog-transmission-directive></unity-catalog-transmission-directive>
+		</div>
+		<div class="UnityWindowFull" style="display:none; overflow-y:scroll; background-color:#dedede;  float:left; position:relative;">
+			<unity-catalog-directive></unity-catalog-directive>
+		</div>
+	</div>
+</section>

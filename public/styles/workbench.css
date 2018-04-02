@@ -1,0 +1,26 @@
+.no_pad{padding:0px;}
+.white-bg{background:white;}
+.border-box{border: 1px solid #ccc;}
+.selectedBg_light td{border-bottom: 1px solid #aaa !important;}
+.gray_clr,.QUEUED{color: gray;}
+.red_clr{color: #DB607A;}
+.yellow_clr{color:#ECC203;}
+.failed, .FAILED{color:#E04B55;}
+.success, .COMPLETED , .SUCCESS{color:#5ABF42;}
+.PROGRESS, .PROCESSING, .RUNNING{color:#ff7f00;}
+.inner-title{font-size: 15px;padding-bottom: 5px;color: green;font-weight: bold;}
+.inner-table{padding-left: 25px;padding-right: 15px;}
+.selectedBg{background: #DFE6F5 !important;border-left: 1px solid #aaa !important;border-right: 1px solid #aaa !important;}
+.selectedBg td{border-top: 1px solid #aaa !important;}
+
+.customeTable i{font-size:16px;cursor:pointer;}
+.customeTable thead th .filter-cell input{min-height:20px !important;height:25px;width:80%;}
+.customeTable thead tr:nth-of-type(1) th,.ng-table th.sortable.sort-desc, .ng-table th.sortable.sort-asc{background:#45A7B8}
+.customeTable thead th{text-align:left;color:white;height: 10%;}
+.customeTable tbody td{font-size:12px;padding:2px 5px !important;vertical-align: middle !important;}
+.customeTable tbody td.center,.table thead th.center,.center_align{text-align:center;}
+.customeTable tbody td.center span{display:block;cursor:pointer;font-size:16px;}
+.customeTable tbody td.center span .fa-play-circle{color: #5ABF42;}
+.customeTable tbody td.desc{max-width: 200px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;vertical-align: middle;}
+.customeTable tbody td.small-desc{max-width: 120px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;vertical-align: middle;}
+.customeTable tbody td.extra-small-desc{max-width: 80px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;vertical-align: middle;}

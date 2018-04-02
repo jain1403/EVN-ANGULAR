@@ -1,0 +1,43 @@
+<style>
+#section-1,#section-2,#overallDiv div,#assetDiv div,#systemDiv div{ 
+ width:100%;
+}
+
+#section-1 div,#section-2 div{
+}
+#overallDiv,#assetDiv,#systemDiv{
+border: 1px solid white;
+}
+#dashboardDiv{
+background: linear-gradient(to right, #284069 , #5b3e67) ! important;
+}
+.chartLabel{
+    padding-left: 28%;
+    color: white;
+}
+
+</style>
+<div id="dashboardDiv">
+
+<div id="section-1" class="col-md-12">
+<div id="overallDiv" class="col-md-4">
+<div id="overall"></div>
+<span class="chartLabel"><label>APM Analytics Overall Coverage</label></span>
+</div>
+<div id="assetDiv" class="col-md-4"> <div id="asset"></div>
+<span class="chartLabel"><label>Coverage Breakdown by Asset</label></span>
+</div> 
+<div id="systemDiv" class="chart-container col-md-4"><div id="system" class="chart"></div>
+<span class="chartLabel"><label>Coverage Breakdown by System</label></span> 
+</div>
+</div>
+<!-- <div id="section-2">
+<div id="subSystemDiv" class="chart-container"><div id="subSystem" class="chart"></div>
+<span class="" style="padding-left: 6%;color: white;"><label>Coverage Breakdown by Sub-System</label></span>
+</div>
+
+</div> -->
+
+
+
+</div>

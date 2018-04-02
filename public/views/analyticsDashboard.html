@@ -1,0 +1,80 @@
+<style>
+#mainDiv{
+background: linear-gradient(to right, #284069 , #5b3e67) ! important;
+
+}
+#gas{
+    top: 36%;
+    left: 46%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+
+}
+.labelHeading{
+    top: 91%;
+    left: 48%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+
+}
+.comingSoonLabel{
+    top: 41%;
+    left: 46%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    position: absolute;
+    font-size: 18px;
+}
+.tiles{
+        display: grid;
+    width: 100%;
+    grid-gap: 0.3rem;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+</style>
+<div id="mainDiv">
+<div class="heading" style="padding: 15px 0px 10px 25px;color: white;font-size: 20px;">
+<label>Analytics Dashboard</label>
+<span style="float: right;padding-right: 2%;font-size: 28px;"><i ng-click="coverageHome()" class="fa fa-home fa-1.8x" aria-hidden="true"></i></span>
+</div>
+<div style="margin: 12px;">
+<div id="main-tile" class="tiles grid-expand">
+	<div class="card" style="cursor: pointer;" ng-click="systemLevel(tile)" id="systemName" ng-if="tile.fuel_name == 'Gas'" ng-repeat="tile in mainData">
+		<div class="colorcode" style="background-color:#2a8ba3;border:1px solid #C9D1D9;border-top-left-radius: 11px;border-top-right-radius: 11px;color:white;height:45px;display:flex;"><div class="cardLabel" style="margin: 0 auto;padding-top: 10px;padding-right: 20px;">{{tile.fuel_name}}</div></div>
+		<div style="position:relative;background: white ! important;height: 178px;border-bottom-left-radius: 11px;border-bottom-right-radius: 11px;">
+		<div id="gas" data-percent="{{tile.overallcount}}" class="circle-bar alignCntr mB10" style="" data-duration="1000"></div>
+		<div class="labelHeading" >Overall Coverage</div>
+		</div>
+	</div>
+	<div class="card" ng-click="" id="" style="opacity:0.6">
+		<div class="colorcode" style="background-color:#2a8ba3;border:1px solid #C9D1D9;border-top-left-radius: 11px;border-top-right-radius: 11px;color:white;height:45px;display:flex;"><div class="cardLabel" style="margin: 0 auto;padding-top: 10px;padding-right: 20px;">Coal</div></div>
+		<div style="position:relative;background: white ! important;height: 178px;border-bottom-left-radius: 11px;border-bottom-right-radius: 11px;">
+		<div id="" class="progress-bar alignCntr mB10" style="padding-top: 10px;margin-left: 108px;" data-duration="1000"></div>
+		<div class="comingSoonLabel">Coming Soon</div>
+		</div>
+	</div>
+	<div class="card" ng-click="" id="" style="opacity:0.6">
+		<div class="colorcode" style="background-color:#2a8ba3;border:1px solid #C9D1D9;border-top-left-radius: 11px;border-top-right-radius: 11px;color:white;height:45px;display:flex;"><div class="cardLabel" style="margin: 0 auto;padding-top: 10px;padding-right: 20px;">Steam</div></div>
+		<div style="position:relative;background: white ! important;height: 178px;border-bottom-left-radius: 11px;border-bottom-right-radius: 11px;">
+		<div id="" class="progress-bar alignCntr mB10" style="padding-top: 10px;margin-left: 108px;" data-duration="1000"></div>
+		<div class="comingSoonLabel">Coming Soon</div>
+		</div>
+	</div>
+	<div class="card" ng-click="" id="" style="opacity:0.6">
+		<div class="colorcode" style="background-color:#2a8ba3;border:1px solid #C9D1D9;border-top-left-radius: 11px;border-top-right-radius: 11px;color:white;height:45px;display:flex;"><div class="cardLabel" style="margin: 0 auto;padding-top: 10px;padding-right: 20px;">Nuclear</div></div>
+		<div style="position:relative;background: white ! important;height: 178px;border-bottom-left-radius: 11px;border-bottom-right-radius: 11px;">
+		<div id="" class="progress-bar alignCntr mB10" style="padding-top: 10px;margin-left: 108px;" data-duration="1000"></div>
+		<div class="comingSoonLabel">Coming Soon</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>

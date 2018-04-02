@@ -1,0 +1,45 @@
+ <style>
+#analyticTableDiv{
+overflow-y:auto; 
+padding: 0px;
+margin: 0px;
+
+}
+.ui-grid-menu-button {
+    height: 30px ! important;
+}
+input.ui-grid-filter-input[type="text"] {
+    height: 20px ! important;
+        min-height: inherit;
+ border-radius: 15px ! important;  
+     padding: 12px ! important;
+    font-size: 15px ! important;    
+} 
+.ui-grid-viewport::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color:#868181;
+}
+ </style> 
+ 
+<div class="searchDiv" style="display:flex;padding-bottom: 12px;padding-left: 5px;">
+<div class="heading" style="flex:1;font-size: 25px;">NERC Cause Codes</div>
+<div style="flex:1; padding-top: 12px;padding-right: 17px;text-align: right; ">Search:&nbsp<input ng-model="searchText" ng-change="refreshData()"></div>
+</div>
+<div ui-grid="nercCauseCode" ui-grid-grouping ui-grid-exporter ui-grid-auto-resize class="grid1"></div>
+
+

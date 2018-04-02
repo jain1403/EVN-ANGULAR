@@ -1,0 +1,244 @@
+<style>
+.analyze-coverage{
+height: calc(100% - 10px);
+overflow-y: auto;
+}
+.upload-btn{
+    float: right;
+    background: #086e87;
+    color: white;
+    margin-right: 4%;
+}
+.drop{
+    height: 160px;
+    font-size: 26px;
+    text-align: center;
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    padding-top: 5%;
+    margin: 2% 2% 2% 4%;
+    width: 92%;
+    border-radius: 22px;
+}
+.upload{
+    text-align: center;
+    padding-top: 5%;
+    margin: 2% 2% 2% 4%;
+    width: 92%;
+}
+.analyze-coverage::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.analyze-coverage::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.analyze-coverage::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+#searchAccordion{
+    margin: 2%;
+    width: 94%;
+}
+
+.thead{
+    background: linear-gradient(141deg, #a1abaa 0%, #65787b 51%, #6f6c6c 75%);
+    font-size: 18px;
+}
+.ui-grid-menu-button {
+	height: 30px ! important;
+}
+
+input.ui-grid-filter-input[type="text"] {
+	height: 20px ! important;
+	min-height: inherit;
+	border-radius: 15px ! important;
+	padding: 12px ! important;
+	font-size: 15px ! important;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+.download-csv-btn{
+    float: right;
+    border: 1px solid #b1b1bc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    color: white;
+    width: 162px;
+    background-color: #444349;
+    height: 31px;
+}
+.download-csv{
+padding-bottom: 2%;
+width: 95%;
+}
+.panel-heading{
+cursor: pointer;
+}
+.heading{
+padding-bottom: 10px;
+    border-bottom: 1px solid #cac6c6;
+}
+#summary-upload,#opportunity-upload{
+ 	font-family: inherit;
+    text-transform: uppercase;
+    font-size: 1em;
+    background: none;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    border-radius: 0.5em;
+    color: #333;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+}
+.upload-label{
+        padding: 25px 0px 0px 0px;
+    text-align: right;
+    
+}
+.upload-div{
+	font-size: 18px;
+    font-weight: lighter;
+    padding: 0em;
+    color: white;
+    padding-right: 4%;
+}
+.upload-data{
+padding: 0;
+    padding-left: 10px;
+}
+.table-header{
+    color: white;
+    text-align: center;
+    vertical-align: middle ! important;
+}
+.p0{
+padding: 0px;
+}
+#summary-table thead tr,#filesTable thead tr{
+height: 3rem ! important;
+}
+</style>
+<div class="analyze-coverage">
+<div class="heading" style="flex:1;font-size: 25px;"><span style="padding-right: 12px;padding-left: 10px;"></span>Analyze Coverage</div>
+	<div class="panel-group" id="searchAccordion">
+    	<div class="panel panel-default">
+        <div class="panel-heading" id="upload-file" data-toggle="collapse" 
+                 data-target="#uploadFile">
+             <h4 class="panel-title">
+  		  	<span>Upload File</span>			               	
+             </h4>
+        </div>
+        <div id="uploadFile" class="panel-collapse collapse">
+            <div class="panel-body">
+            	<div class="dropbox p10 drop">
+			<span class="droptxt">You can Drag your files here...<i class="fa fa-cloud-upload"></i></span>
+			<div class="col-xs-12 p0" style="margin-left: 3%;">
+			<div class="upload-label col-xs-6"><label class="upload-div col-xs-6">Upload Summary: </label><input class="upload-data col-xs-6" id="summary-upload" type="file" accept=".xlsx" /></div>
+			<div class="upload-label col-xs-6"><label class="upload-div col-xs-6">Upload Opportunity: </label><input class="upload-data col-xs-6" id="opportunity-upload" type="file" accept=".csv" /></div>
+			</div>
+		</div>
+		<!--  <div class="dropbox p10 drop">
+			
+		</div> -->
+		<div>
+		<table class="table table-striped table-bordered table-condensed upload" id="filesTable" ng-if="filesArray.length">
+				 <thead class="thead">
+					   <tr>
+							 <th class="table-header">File Name</th>
+							 <th class="table-header">Size</th>
+							 <th class="table-header"></th>
+					   </tr>
+				 </thead>
+				 <tbody>
+					   <tr ng-repeat="item in filesArray track by $index">
+							 <td><i class=" fa fa-file-excel-o file-icon"></i>{{item.name}}</td>
+							 <td>{{item.fileSize}} (KB)</td>
+							 <td class="center_align red_clr"><i class="fa fa-trash-o red_clr pointer-select" aria-hidden="true" ng-click="removeItem(item.name)"></i></td>
+					   </tr>
+				 </tbody>
+			</table>
+		</div>
+		<div ng-if="(filesArray.length == '2')">
+		<button class="btn upload-btn" ng-click="uploadfiles()">Upload</button>
+		</div>
+			
+            </div>
+        </div>
+      </div>
+    </div>
+		
+		
+		<div ng-show="showCoverageTable" class="panel-group" id="searchAccordion">
+    	<div class="panel panel-default">
+        <div class="panel-heading" id="coverage-result"
+                 data-toggle="collapse" 
+                 data-target="#collapseOne">
+             <h4 class="panel-title">
+  		  	<span>Summary</span>			               	
+             </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div style="flex: 2; display: flex; padding-right: 2%;padding-bottom: 1%;">
+				
+							<div style="margin-left: auto; margin-top: 10px;">
+								<div class="buttonCss">
+									<a id='export-opportunity' style="color: white; text-decoration: none;"><span
+										id=''><i class="fa fa-download" aria-hidden="true"></i>&nbspDownload Opportunity</span></a>
+								</div>
+							</div>
+							<div style="width: 150px; margin-top: 10px;">
+								<input type="file" style="display: none;" id="csv-file" multiple />
+								<div class="buttonCss">
+									<a id='export-summary' style="color: white; text-decoration: none;"><span
+										id=''><i class="fa fa-download" aria-hidden="true"></i>&nbspDownload Summary</span></a>
+								</div>
+							</div>
+		 </div>
+            <div class="panel-body">
+             <div  class="coverage-summary-table">
+				<table class="table table-striped table-bordered table-condensed upload" id="summary-table">
+						 <thead class="thead">
+							   <tr>
+									 <th class="table-header">Description</th>
+									 <th class="table-header">Value</th>
+							   </tr>
+						 </thead>
+						 <tbody>
+							   <tr ng-repeat="(key, value) in coverageData track by $index">
+									 <td>{{key}}</td>
+									 <td>{{value}}</td>
+							   </tr>
+						 </tbody>
+					</table>
+		</div>
+			
+            </div>
+        </div>
+      </div>
+    </div>
+		
+</div>

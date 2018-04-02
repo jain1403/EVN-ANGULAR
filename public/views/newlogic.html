@@ -1,0 +1,386 @@
+<style>
+.analyze-coverage {
+	height: calc(100% -  10px);
+	overflow-y: auto;
+}
+
+.upload-btn {
+	background: #086e87;
+	color: white;
+	margin-right: 2%;
+}
+
+.fr {
+	float: right;
+}
+
+#uploadFile .panel-body,#userFile .panel-body  {
+	font-size: 26px;
+	text-align: center;
+	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+	margin: 2% 2% 2% 4%;
+	width: 92%;
+	border-radius: 22px;
+}
+
+.upload {
+	text-align: center;
+	padding-top: 5%;
+	margin: 2% 2% 2% 4%;
+	width: 92%;
+}
+
+.analyze-coverage::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.analyze-coverage::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.analyze-coverage::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+
+#searchAccordion,#inputAccordion,#outputAccordion,#runAccordion{
+	margin: 2%;
+	width: 94%;
+}
+
+.thead {
+	background: linear-gradient(141deg, #a1abaa 0%, #65787b 51%, #6f6c6c 75%);
+	font-size: 18px;
+}
+
+.ui-grid-menu-button {
+	height: 30px ! important;
+}
+
+input.ui-grid-filter-input[type="text"] {
+	height: 20px ! important;
+	min-height: inherit;
+	border-radius: 15px ! important;
+	padding: 12px ! important;
+	font-size: 15px ! important;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+
+.download-csv-btn {
+	float: right;
+	border: 1px solid #b1b1bc;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	white-space: nowrap;
+	color: white;
+	width: 162px;
+	background-color: #444349;
+	height: 31px;
+}
+
+.download-csv {
+	padding-bottom: 2%;
+	width: 95%;
+}
+
+.panel-heading {
+	cursor: pointer;
+}
+
+.heading {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #cac6c6;
+}
+
+#input-upload,#head-start,#head-end,#user-upload,#data-start{
+	font-family: inherit;
+	text-transform: uppercase;
+	font-size: 1em;
+	background: none;
+	-webkit-border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	border-radius: 0.5em;
+	color: #333;
+	font-size: 14px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#head-start,#head-end {
+	background: white;
+}
+
+.upload-label {
+	padding: 25px 0px 0px 0px;
+	text-align: right;
+}
+
+.upload-div {
+	font-size: 18px;
+	font-weight: lighter;
+	padding: 0em;
+	color: white;
+}
+
+.header-section {
+	width: 40%;
+	display: inline-block;
+	background: bisque;
+	padding: 2%;
+	border-radius: 15px;
+	margin: 2% 2% 2% 6%;
+}
+
+.headers-checkbox {
+	font-size: 18px;
+	font-weight: lighter;
+	padding: 0em;
+	text-align: left;
+}
+
+.headers-checkbox {
+	    padding-top: 2%;
+    	padding-left: 1%;
+}
+
+#head-start,.upload-data {
+	padding: 0;
+	padding-left: 10px;
+}
+
+.table-header {
+	color: white;
+	text-align: center;
+	vertical-align: middle ! important;
+}
+
+.header-section .labelHeading{
+    margin-bottom: 3%;
+    font-size: 18px;
+    font-weight: 600;
+}
+.header-section label{
+    padding: 2px;
+}
+.p0 {
+	padding: 0px;
+}
+
+#summary-table thead tr,#filesTable thead tr {
+	height: 3rem ! important;
+}
+.sheets-list div:first-child{
+    font-size: 19px;
+    font-weight: 600;
+    margin-left: 2%;
+}
+.rulesHeader{
+	font-size: 16px;
+    font-weight: 600;
+    margin-top: 2%;
+     margin-left: 1%;
+    border-bottom: 1px solid #d1d0d8;
+    padding-bottom: 1%;
+}
+.rowIndex{
+    margin: 11% 0% 0% 40%;
+    display: block;
+}
+
+</style>
+<!-- <input class="upload-data" id="user-upload" type="file"
+								accept=".csv" />
+<button class="btn upload-btn" style="margin-right: 6%;"
+								ng-click="uploadTest()">Upload Test</button>
+<button class="btn upload-btn" style="margin-right: 6%;"
+								ng-click="downloadTest()">Download Test</button> -->
+
+<div class="analyze-coverage">
+	<div class="heading" style="flex: 1; font-size: 25px;">
+		<span style="padding-right: 12px; padding-left: 10px;"></span>
+	</div>
+
+
+	
+
+	<div class="panel-group" id="searchAccordion">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="upload-file" data-toggle="collapse"
+				data-target="#uploadFile">
+				<h4 class="panel-title">
+					<span>Upload File</span>
+				</h4>
+			</div>
+			<div id="uploadFile" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div>
+						<div class="p0" style="margin-top: 2%;">
+							<label class="upload-div col-xs-4">Upload Input: </label> <input
+								class="upload-data col-xs-8" id="input-upload" type="file"
+								accept=".xlsx" />
+						</div>
+					</div>
+					<div>
+						<button class="btn upload-btn fr" ng-click="uploadFile()">Upload</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-group" id="inputAccordion">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="input-file" data-toggle="collapse"
+				data-target="#inputFile">
+				<h4 class="panel-title">
+					<span>Input File</span>
+				</h4>
+			</div>
+			<div id="inputFile" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="sheets-list" ng-show="sheetNames.length > 1">
+						<div>Select Sheet:</div>
+						<div style="float: left;padding: 1% 2% 2% 2%;" ng-repeat="sheets in sheetNames track by $index" >
+						<input type="radio" name="sheets" value="{{sheets}}" ng-model="sheetList[sheetName]" ng-click='sheetSelected(sheetList[sheetName])'>
+						 <label>{{sheets}}</label>
+						 </div>
+					</div>
+					{{test[sheetName]}}
+					<div style="clear: left;" ng-show="showInputTable">
+					<div ui-grid="rawTableWithHeader" ui-grid-exporter ui-grid-auto-resize class="grid1" style="height: {{gridHeight}}px"></div>
+					</div>
+					<div ng-show="showInputTable" class="rulesHeader">Apply Rules</div>
+					<div class="headers-checkbox" ng-show="showInputTable" ng-init="">
+						<input type="radio" name="fileHeader" ng-model="fileHeader" ng-value="true"> <label>Input With Headers</label>
+						 <input type="radio" name="fileHeader" ng-model="fileHeader" ng-value="false" style="margin-left: 2%;"> <label>Input No Headers</label>
+					</div>
+					
+					
+						
+						<div class="p0" style="" ng-show="showInputTable && fileHeader">
+							<div class="rulesHeader" style="border: none;display: inline-block; ">Select
+								Header Rows :</div>
+							<div class="rows-input" style="display: inline-block;">
+								<span><input type="number" id="head-start" 
+									ng-model="headStartIndex" /></span> to <span><input
+									type="number" id="head-end" ng-model="headEndIndex" /></span>
+							</div>
+						</div>
+						
+						<div class="p0" style="" ng-show="showInputTable">
+							<div class="rulesHeader" style="border: none;display: inline-block; ">Select
+								row from where data starts :</div>
+							<div class="rows-input" style="display: inline-block;">
+								<input type="number" id="data-start" ng-model="dataStartIndex" />
+							</div>
+						</div>
+						
+						<div class="header-section" ng-show="showInputTable">
+								<label class="labelHeading">Select the columns to forward</label>
+								<div ng-repeat="header in headersArray">
+									<label><input type="checkbox"
+										ng-model="myCountry.headerSelected[header]"> {{header}}</label>
+								</div>
+						</div>
+						
+						<div class="header-section" ng-show="showInputTable">
+								<label class="labelHeading">Select the columns to compare</label>
+								<div ng-repeat="header in headersArray">
+									<label><input type="checkbox"
+										ng-model="myCountry.comparisonSelected[header]"> {{header}}</label>
+								</div>
+						</div>
+						
+						<div ng-show="showInputTable">
+							<button class="btn upload-btn fr" style="margin-right: 6%;"
+								ng-click="applyRules()">Apply Rules</button>
+						
+						</div>
+					
+					
+					
+					<div class="header-lists" ng-show="selectColumns">
+						<!-- <div ui-grid="userInput" ui-grid-exporter ui-grid-auto-resize
+							class="grid1"></div> -->
+						<div class="header-section">
+							<label class="labelHeading">Select the Columns which are to be Forwarded</label>
+							<div ng-repeat="(key, value) in headersArray">
+								<label><input type="checkbox"
+									ng-model="myCountry.headerSelected[key]"> {{value}}</label>
+							</div>
+						</div>
+						<div class="header-section">
+							<label class="labelHeading">Select the Columns for Comparison</label>
+							<div ng-repeat="(key, value) in headersArray">
+								<label><input type="checkbox"
+									ng-model="myCountry.comparisonSelected[key]"> {{value}}</label>
+							</div>
+						</div>
+						<button class="btn upload-btn fr" style="margin-right: 6%;" ng-click="applyRules()">Apply Rules</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-group" id="outputAccordion">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="output-file" data-toggle="collapse"
+				data-target="#outputFile">
+				<h4 class="panel-title">
+					<span>Output File</span>
+				</h4>
+			</div>
+			<div id="outputFile" class="panel-collapse collapse">
+				<div class="panel-body" ng-show="appliedTable">
+					<!-- <button class="btn upload-btn" id="abc">Download</button> -->
+					<div ui-grid="appliedInput" ui-grid-exporter ui-grid-auto-resize
+						class="grid1" style="height: {{gridHeight}}px"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-group" id="runAccordion">
+		<div class="panel panel-default">
+			<div class="panel-heading" id="user-file" data-toggle="collapse"
+				data-target="#userFile">
+				<h4 class="panel-title">
+					<span>Run Algorithm</span>
+				</h4>
+			</div>
+			<div id="userFile" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div>
+						<div class="p0" style="margin-top: 2%;">
+							<label class="upload-div col-xs-4">Upload Input: </label> <input
+								class="upload-data col-xs-8" id="user-upload" type="file"
+								accept=".csv" />
+						</div>
+					</div>
+					<div>
+						<button class="btn upload-btn fr" ng-click="uploadTest()">Upload</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

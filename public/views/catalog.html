@@ -1,0 +1,123 @@
+<style>
+.cat-sidebar::-webkit-scrollbar-track,.cat-card-area::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.cat-sidebar::-webkit-scrollbar,.cat-card-area::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.cat-sidebar::-webkit-scrollbar-thumb,.cat-card-area::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color:#868181;
+}
+.cat-card-search {
+    padding: 1.5em 0em 1.5em 0em;
+}
+.cat-filters {
+    margin-right: 0.2em;
+    cursor: pointer;
+	border: 1px solid #2f8eb3;
+	border-radius: 15px;
+	padding: 5px;
+    background: #2f8eb3;
+}
+.clearFilter {
+    margin-right: 0.2em;
+    cursor: pointer;
+	border: 1px solid #2f3133;
+	border-radius: 15px;
+	padding: 5px;
+    background: #2f3133;
+}
+.cat-card-link{
+	text-decoration: none;
+}
+a{
+color: white ! important;
+text-decoration: none ! important;
+}
+.no-touch .cd-accordion-menu label:hover
+{
+    background: #2f8eb3;
+}
+.selectedBackground{
+background: #2f8eb3 !important;
+}
+</style>
+<section id="catalog">
+	<div class="cat-sidebar" style="overflow: auto;">
+		<!-- Filters -->
+		<ul class="cd-accordion-menu animated">
+			<!-- GENERATION -->
+			<li class="has-children" ng-repeat="sidebarobject in sidebardata | unique: 'fuel_id'">
+	      				<input ng-click="filters.sidebar.fuel = {id:sidebarobject.fuel_id, name:sidebarobject.fuel_name};sessionValue('fuel',sidebarobject.fuel_id,sidebarobject.fuel_name);filters.sidebar.asset = null;filters.sidebar.system= null;filters.sidebar.subsystem= null" type="checkbox" ng-checked="sidebarobject.fuel_id == filters.sidebar.fuel.id" name ="group-fuel{{sidebarobject.fuel_id}}" id="group-fuel{{sidebarobject.fuel_id}}">
+						<label ng-class="{'selectedBackground':currentSelected==sidebarobject.fuel_name}" for="group-fuel{{sidebarobject.fuel_id}}">{{sidebarobject.fuel_name}}</label>
+						<ul>
+							<li class="has-children" ng-repeat="subcat1 in sidebardata | filter:{fuel_id:sidebarobject.fuel_id} | unique: 'asset_id'" ng-if="subcat1.asset_name">
+								<input ng-click="filters.sidebar.asset = {id:subcat1.asset_id, name:subcat1.asset_name};sessionValue('asset',subcat1.asset_id,subcat1.asset_name)" type="checkbox" ng-checked="subcat1.asset_id == filters.sidebar.asset.id" name ="sub-group-level-asset{{subcat1.asset_id}}" id="sub-group-level-asset{{subcat1.asset_id}}">
+								<label ng-class="{'selectedBackground':currentSelected==subcat1.asset_name}" for="sub-group-level-asset{{subcat1.asset_id}}">{{subcat1.asset_name}}</label>
+								<ul>
+									<li class="has-children" ng-repeat="subcat2 in sidebardata | filter:{fuel_id:sidebarobject.fuel_id, asset_id:subcat1.asset_id} | unique: 'system_id'" ng-if="subcat2.system_id">
+										<input ng-click="filters.sidebar.system = {id:subcat2.system_id, name:subcat2.system_name};sessionValue('system',subcat2.system_id,subcat2.system_name)" type="checkbox" ng-checked="subcat2.system_id == filters.sidebar.system.id" name ="sub-group-level-system{{subcat2.system_id}}" id="sub-group-level-system{{subcat2.system_id}}">
+										<label ng-class="{'selectedBackground':currentSelected==subcat2.system_name}" for="sub-group-level-system{{subcat2.system_id}}" >{{subcat2.system_name}}</label>
+										<ul>
+											<li class="has-children" ng-repeat="subcat3 in sidebardata | filter:{fuel_id:sidebarobject.fuel_id, asset_id:subcat1.asset_id, system_id:subcat2.system_id} | unique: 'subsystem_id'" ng-if="subcat3.subsystem_id">
+												<input ng-click="filters.sidebar.subsystem = {id:subcat3.subsystem_id, name:subcat3.subsystem_name};sessionValue('subsystem',subcat3.subsystem_id,subcat3.subsystem_name)" type="checkbox" ng-checked="subcat3.subsystem_id == filters.sidebar.subsystem.id" name ="sub-group-level-subsystem{{subcat3.subsystem_id}}" id="sub-group-level-subsystem{{subcat3.subsystem_id}}">
+												<label ng-class="{'selectedBackground':currentSelected==subcat3.subsystem_name}" for="sub-group-level-subsystem{{subcat3.subsystem_id}}" >{{subcat3.subsystem_name}}</label>
+												<ul>
+													<li ng-repeat="subcat4 in sidebardata | filter:{fuel_id:sidebarobject.fuel_id, asset_id:subcat1.asset_id, system_id:subcat2.system_id, system_id:subcat3.subsystem_id} | unique: 'component_id'" ng-if="subcat4.component_id">
+														<input ng-click="filters.sidebar.component = {id:subcat4.component_id, name:subcat4.component_name};sessionValue('component',subcat4.component_id,subcat4.component_name)" type="checkbox" ng-checked="subcat4.component_id == filters.sidebar.component.id" name ="component{{subcat4.component_id}}" id="component{{subcat4.component_id}}">
+														<label ng-class="{'selectedBackground':currentSelected==subcat4.component_name}" for="component{{subcat4.component_id}}" >{{subcat4.component_name}}</label>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+			</li>
+			<!-- TRANSMISSION -->
+					 <li class="has-children">
+	      				<input type="checkbox" name ="group-3" id="group-3">
+						<label for="group-3">Grid</label>
+						<ul>
+							<li><a href="">Relays</a></li>
+							<li><a href="">Breakers</a></li>
+							<li><a href="">Transformers</a></li>
+						</ul>
+	      			</li>
+		</ul> <!-- cd-accordion-menu -->
+	</div>
+
+	<div class="cat-card-area" style="overflow: auto;">
+		<div class="cat-card-search">
+			<input id="card-search" type="text" placeholder="Search analytics..." class="ge-text-input cat-search" ng-model="search.$"></input>
+			<p style="padding-top:15px;">
+				<span class="cat-filters selectedFilter" ng-if="filters.sidebar.fuel.id" ng-init="filters.sidebar.system= null;filters.sidebar.subsystem= null"><a ng-click="filters.sidebar.fuel = null; filters.sidebar.asset = null; filters.sidebar.system= null;filters.sidebar.subsystem= null"><span style="padding-right: 4px;">{{filters.sidebar.fuel.name.trunc(25)}}</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+				<span class="" ng-if="filters.sidebar.asset.id"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+				<span class="cat-filters selectedFilter" ng-if="filters.sidebar.asset.id"><a ng-click="filters.sidebar.asset = null; filters.sidebar.system= null;filters.sidebar.subsystem= null"><span style="padding-right: 4px;">{{filters.sidebar.asset.name.trunc(25)}}</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+				<span class="" ng-if="filters.sidebar.system.id"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+				<span class="cat-filters selectedFilter" ng-if="filters.sidebar.system.id"><a ng-click="filters.sidebar.system = null; filters.sidebar.subsystem= null"><span style="padding-right: 4px;">{{filters.sidebar.system.name.trunc(25)}}</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+				<span class="" ng-if="filters.sidebar.subsystem.id"><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+				<span class="cat-filters selectedFilter" ng-if="filters.sidebar.subsystem.id"><a ng-click="filters.sidebar.subsystem= null"><span style="padding-right: 4px;">{{filters.sidebar.subsystem.name.trunc(25)}}</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+			 	<span style="float: right;padding-right: 40px;"><a class="clearFilter" ng-if="filters.sidebar" ng-click="filters.sidebar = null"><span style="padding-right: 4px;">Clear Filter</span><span><i class="fa fa-times" aria-hidden="true"></i></span></a></span>
+			 </p>
+		</div>
+		<!-- Cards -->
+		<a class="cat-card-link" ng-click="sharedData.setAnalyticFilters(filters);storeSession()" ui-sref="analytic({analyticID: analytic.analytic_id,analyticObj:analytic})" ng-repeat="analytic in analyticdata | filter:search:strict | filter:{asset_id:filters.sidebar.asset.id,system_id:filters.sidebar.system.id,subsystem_id:filters.sidebar.subsystem.id, fuel_id:filters.sidebar.fuel.id,component_id:filters.sidebar.component.id} | unique: 'analytic_id'" ng-if="analytic.catalog_analytic_name">
+		<div ng-class="catcardstyle">
+			<p class="cat-card-title">{{analytic.catalog_analytic_name.trunc(60) }}</p>
+			<p class="cat-card-description">{{ analytic.analytic_description.trunc(100) }}</p>
+			<img class="cat-card-predix" src="images/predix.png">
+		</div></a>
+		</div>
+</section>

@@ -1,0 +1,831 @@
+<style>
+.chosen-choices {
+	margin: 0px ! important;
+}
+
+.mainDiv select,.mainDiv .chosen-container {
+	width: calc(100% -   5rem) ! important;
+	border-radius: 3px;
+	height: 25px;
+}
+
+.title {
+	/* padding: 5px 0px 10px 0px; */
+	padding-top: 8px;
+	padding-bottom: 9px;
+}
+
+::-webkit-input-placeholder {
+	font-size: 14px !important;
+}
+
+input[type='radio'] {
+	transform: scale(1.2);
+}
+
+#analyticApplication_chosen,#inputTag_chosen,#nercCode_chosen {
+	width: 87.5% ! important;
+	height: 58px ! important;
+	/*  height: 56px ! important ;
+    overflow: auto ! important; */
+}
+
+#analyticApplication_chosen .search-field input,#inputTag_chosen .search-field input,#nercCode_chosen .search-field input
+	{
+	width: 226px ! important;
+}
+
+#analyticApplication_chosen .chosen-choices,#inputTag_chosen .chosen-choices,#nercCode_chosen .chosen-choices{
+	height: 58px ! important;
+	overflow-y: scroll;
+}
+
+.submitButtonDiv {
+	float: right;
+	padding-right: 2%;
+	padding-top: 12px;
+	padding-bottom: 20px;
+	display: flex;
+}
+
+#analyticApplication_chosen .search-choice,#inputTag_chosen .search-choice,#nercCode_chosen .search-choice
+	{
+	background: #3e87e8;
+	color: white;
+	height: 44%;
+	border-radius: 6px;
+	padding-top: 6px;
+	border: none;
+}
+
+#analyticApplication_chosen .chosen-results,#inputTag_chosen .chosen-results,#nercCode_chosen .chosen-results {
+	margin-left: 0px ! important;
+}
+
+
+.alert-box {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.analyticSuccess {
+	color: #3c763d;
+	display: none;
+	top: 5%;
+	left: 85%;
+	margin-right: -50%;
+	text-align: center;
+	font-weight: bold;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	position: absolute;
+	z-index: 100;
+	width: 18rem;
+	margin: .33333rem;
+	min-height: 3.33333rem;
+	word-wrap: break-word;
+	background-color: var(-  -px-alert-message-background-color, #d8e0e5);
+	opacity: 1;
+}
+.apvdRvdBy {
+	padding-left: 22px;
+	padding-top: 10px;
+	display: flex;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d1d0d8;
+}
+.modal {
+	max-width: none !important;
+}
+.successLabel {
+	padding: 0px 0px 10px 2px;
+	font-size: 19px;
+	color: green;
+}
+.failureLabel {
+	padding: 10px 0px 10px 2px;
+	font-size: 19px;
+	color: red;
+}
+
+.ui-grid-menu-button {
+	height: 30px ! important;
+}
+
+input.ui-grid-filter-input[type="text"] {
+	height: 20px ! important;
+	min-height: inherit;
+	border-radius: 15px ! important;
+	padding: 12px ! important;
+	font-size: 15px ! important;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.ui-grid-viewport::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+
+#update-tab::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+#update-tab::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+#update-tab::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+	background-color: #868181;
+}
+
+.success,.failure {
+	max-height: 200px;
+}
+
+.modal-title {
+	font-size: larger;
+	font-weight: 600;
+}
+.border-red{
+ border-color: red !important;
+}
+ .loadinggif {
+    background:url('./images/ajax-loader.gif') no-repeat right center;
+       
+} 
+.pd-bt{
+ padding-bottom: 2px;
+}
+
+#analyticInfo{
+    padding-top: 0px;
+    padding-left: 40%;
+    padding-bottom: 8px;
+    font-size: 13px;
+    color: green;
+    font-weight: 600;
+}
+#nercInfo{
+ 	padding-top: 0px;
+    padding-left: 20%;
+    padding-bottom: 8px;
+    font-size: 13px;
+    color: green;
+    font-weight: 600;
+}
+.editIcon{
+    padding: 8px 0px 0px 13px;
+    cursor: pointer;
+}
+.cursor{
+cursor: pointer;
+}
+.success {
+	color: black ! important;
+}
+
+.addUpdateTab{
+    overflow:hidden;
+    margin: 0.5% 0% 0% 1%;
+    padding: 0;
+}
+.tab{
+    display:inline-block;
+}
+.tab label{
+    padding: 10px 15px;
+    background: #6d6b6b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display:block;
+}
+.tab-content{
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin:0
+}
+.panel-group .panel{
+margin: 2%
+}
+.searchField{
+    min-height: 1.8rem ! important;
+    width: 257.5px ! important;
+}
+.panel-title:hover {
+     cursor: pointer;
+}
+#addApmMainDiv,#update-tab{
+border-top:1px solid #d1d0d8 ;
+}
+.bg-color{
+background: #086e87 ! important
+}
+#add-analyitcs,#update-analyitcs{
+ border-top-left-radius: 18px;
+    border-top-right-radius: 17px;
+}
+.active{
+background: none ! important;
+}
+.pad{
+padding: 15px 0px 8px 11px ! important;
+}
+#mainHeader{
+padding: 15px 0px 16px 15px; font-weight: bold; font-size: 20px; flex: 1;
+}
+.searchResult{
+
+}
+.grid1 {
+   margin: 0px ! important;
+}
+.txt-center{
+    text-align: center;
+}
+#update-tab{
+overflow-y:auto; 
+}
+#searchLabel{
+    padding: 6px 0px 10px 0px;
+    font-size: 19px;
+    font-weight: 600;
+    border-top: 1px solid #ececf0;
+}
+.no-result{
+ color: red;
+}
+.searchTag{
+font-weight: 600;
+}
+.disable{
+    background: #999a9a;
+}
+
+</style>
+<div id="add-update-tab">
+	<ul class="addUpdateTab">
+		<li class="tab" ng-click="addAnalytics()">
+			<label id="add-analyitcs">Add Analytics</label>
+		</li>
+	    <li class="tab" ng-click="updateAnalytics()">
+			<label id="update-analyitcs">Update Analytics</label>
+		</li>
+	</ul>
+</div>
+<div id="update-tab" ng-show="updateDiv">
+
+	<div ng-show="serachAccordian" class="panel-group" id="searchAccordion">
+    	<div class="panel panel-default">
+        <div class="panel-heading">
+             <h4 id="search-criteria"
+             	 class="panel-title"
+                 data-toggle="collapse" 
+                 data-target="#collapseOne">
+   <span ng-bind-html="searchHeader"></span>			               	
+             </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div ng-show="serachCategory" class="singleElementPad" style="display: flex;">
+              <div style="display: flex;flex:1">
+				<div class="title" style="flex:1;">NERC Cause Code :</div>
+				<div style="flex: 1;    padding-right: 2%;">
+					 <input class="searchField" ng-model="nercSearchModel" id="nercSearch" placeholder="NERC Cause Code..." type="text" ng-change="enableSearch('nercSearch')">
+				</div>
+				<div style="flex: 1;">
+					<button id="nerc-submit" ng-disabled="disableNerc" ng-click="updateNerc()" class="submitButton">
+					<i style="padding-right: 5%" class="fa fa-search" aria-hidden="true"></i>
+					Search
+					</button>
+				</div>
+				</div>
+				 <div style="display: flex;flex:1">
+				<div class="title" style="flex: 0.7;">Analytic Name :</div>
+				<div style="flex: 1;    padding-right: 2%;">
+					 <input class="searchField" ng-model="analyticSearchModel" id="analyticNameSearch" placeholder="Analytic Name..." type="text" ng-change="enableSearch('analyticNameSearch')">
+				</div>
+				<div style="flex: 1;">
+					<button id="analytic-submit" ng-disabled="disableAnalytic" ng-click="updateAnalytic()" class="submitButton">
+					<i style="padding-right: 5%" class="fa fa-search" aria-hidden="true"></i>
+					Search
+					</button>
+				</div>
+				</div>
+			</div>
+			<div class="searchResult" >
+			<div ng-show="showTableLabel" id="searchLabel">Search Result</div>
+			<div ng-show="showTable" ui-if="gridOptions.data.length>0"  ui-grid="gridOptions" ui-grid-auto-resize style="height: {{gridHeight}}px" id="suggestion-update" class="grid1"></div>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="addUpdateForm" class="panel-group" id="searchAccordion">
+    	<div class="panel panel-default">
+        <div class="panel-heading">
+             <h4 id="search-result"
+             	 class="panel-title"
+                 data-toggle="collapse" 
+                 data-target="#collapseTwo">
+               	 {{addUpate}} Analytics
+             </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body" id="">
+				              <div class="mainDiv" id="addApmMainDiv" style="overflow-y: auto;">
+				
+					<div style="display: flex; border-bottom: 1px solid #d1d0d8">
+					<!-- 	<span class="" ng-show="update" style="padding: 15px 0px 0px 12px;color: #000;font-size: 20px;"><i class="fa fa-arrow-left backButton" ng-click="backToUpdate()" aria-hidden="true"></i></span> -->
+						
+						<div class="header" id="mainHeader">
+							{{addUpate}} Analytics</div>
+						<div ng-show="!inUpdate" style="flex: 2; display: flex; padding-right: 2%">
+				
+							<div style="margin-left: auto; margin-top: 10px;">
+								<div class="buttonCss" ng-click="downloadTemp()">
+									<a id='' style="color: white; text-decoration: none;"><span
+										id=''><i class="fa fa-download" aria-hidden="true"></i>&nbspDownload
+											Template</span></a>
+								</div>
+							</div>
+							<div style="width: 105px; margin-top: 10px;">
+								<input type="file" style="display: none;" id="csv-file" multiple />
+								<div class="buttonCss" ng-click="uploadCsv()">
+									<a id='' style="color: white; text-decoration: none;"><span
+										id=''><i class="fa fa-upload" aria-hidden="true"></i>&nbspUpload
+											Data</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="alert-box analyticSuccess"></div>
+					<div class="apvdRvdBy">
+						<div>
+							<input type="checkbox" disabled> <label
+								style="padding: 5px 5px; font-weight: 600;">Reviewed By </label><input
+								type="text" id="reviewedBy" value="Reviewer Name"
+								style="min-height: 1.2rem ! important; width: 60% !important;"
+								disabled>
+						</div>
+						<div>
+							<input type="checkbox" disabled> <label
+								style="padding: 5px 5px; font-weight: 600;">Approved By </label><input
+								type="text" id="approvedBy" value="Approver Name"
+								style="min-height: 1.2rem ! important; width: 60% !important;"
+								disabled>
+						</div>
+					</div>
+					<div class="header"
+						style="padding: 10px 0px 8px 20px; font-weight: bold; font-size: 16px;">Asset
+						Data</div>
+					<div style="">
+						<div class="header"
+							style="padding: 8px 0px 8px 20px;float: left;width: 45%;">
+							<div class="title" style="float: left;width: 43%;">
+								NERC Cause Code<span style="color: red;">*</span> :
+							</div>
+							<div style="float: left;width: 57%;">
+								<input class="numberValidation" id="nercCauseCodeField" ng-blur="checkNercCode()"
+									placeholder="NERC Cause Code..." type="text">
+							</div>
+						</div>
+						<div class="" id="fuelType" ng-show="!showAdvnc" style="padding: 5px 0px 12px;float: left;width: 38%;margin-left: 6%;">
+								<div class="title" style="float: left;width: 23%;">
+									Fuel Type<span style="color: red;">*</span> :
+								</div>
+								<div style="float: left;width: 77%;">
+									<select id="fuelNameEBS"
+										onchange="angular.element(document.getElementById('fuelNameEBS')).scope().onChangeEBS()">
+										<option value="" hidden />
+										<option ng-repeat="fuel in fuelName" value="{{fuel.fuelName}}">{{fuel.fuelName}}</option>
+									</select>
+								</div>
+						</div>
+						<div style="padding-right: 2%;float: right;width: 10%;">
+							<div style="margin-left: auto; margin-top: 10px;">
+								<div class="buttonCss" ng-click="showAdvncOptn()">
+									<span id='' title="Add by Equipment Breakdown Structure">Add
+										by EBS</span>
+								</div>
+							</div>
+						</div>
+						<br style="clear: left;" />
+					</div>
+						<div id="nercInfo" ng-show="nercCheck">
+								Check existing list of analytics mapped to NERC. <a ng-click="analyticNercMatch()" class="cursor">Click Here.</a>
+							</div>
+					<div ng-show="showAdvnc" id="advancedOption"
+						style="display: flex; padding: 18px 0px 8px 20px; border-top: 1px solid #d1d0d8;">
+						<div style="flex: 1;">
+							<div class="singleElementPad" id="fuelType" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Fuel Type<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="fuelName" 
+										onchange="angular.element(document.getElementById('fuelName')).scope().onChange()">
+										<option value="" hidden />
+										<option ng-repeat="fuel in fuelName" value="{{fuel.fuelName}}">{{fuel.fuelName}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Asset<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="assetName"
+										onchange="angular.element(document.getElementById('assetName')).scope().onChangeAsset()">
+										<option value="" hidden />
+										<option ng-repeat="asset in assetName"
+											value="{{asset.assetMasterId}}">{{asset.assetName}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									System<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="systemName"
+										onchange="angular.element(document.getElementById('systemName')).scope().onChangeSystem()">
+										<option value="" hidden />
+										<option ng-repeat="system in systemName"
+											value="{{system.sysMasterId}}">{{system.systemName}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Sub system<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="subSystemName"
+										onchange="angular.element(document.getElementById('subSystemName')).scope().onChangeSubSystem()">
+										<option value="" hidden />
+										<option ng-repeat="subSystem in subSystemName"
+											value="{{subSystem.subsysMasterId}}">{{subSystem.subSystemName}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Component<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="compName"
+										onchange="angular.element(document.getElementById('compName')).scope().onChangecomp()">
+										<option value="" hidden />
+										<option ng-repeat="comp in compName" value="{{comp.CompMasterId}}">{{comp.CompName}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="header"
+						style="padding: 10px 0px 8px 20px; font-weight: bold; font-size: 16px; border-top: 1px solid #d1d0d8;">Analytic
+						Data</div>
+					<div id="analyticData"
+						style="display: flex; padding: 10px 0px 0px 20px;">
+						<div style="flex: 1;">
+							<div class="singleElementPad" id="analyticNameDiv" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Name<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticName" ng-blur="checkAnalyticName()"
+										placeholder="Analytic Name..." type="text">
+								</div>
+							</div>
+							<div id="analyticInfo" ng-show="analyticCheck">
+								<!-- Check if Analytics already exsist. <a ng-click="checkAnalyticSeviceCall()" class="cursor">Click Here.</a> -->
+								<span>Found Analytic with Similar Name. <a ng-click='analyticExactMatch()' class='cursor'>Click Here.</a></span>
+								 <!-- <span ng-if="suggestionMatch">Similar Analytics exsists.</span> --> 
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Description<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticDes"
+										placeholder="Analytic Description..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Analytic Catalog Name :
+								</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticCatalog"
+										placeholder="Analytic Catalog Name..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Document Link<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticDocName"
+										placeholder="Documentation Link..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Owner<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticOwner"
+										placeholder="Analytic Owner..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Blueprint Name :</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="bluePrintName"
+										placeholder="Blueprint Name..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Application Description
+									:</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="applicationDes"
+										placeholder="Application Description..." type="text">
+								</div>
+							</div>
+							<!-- <div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">RPN :</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="rpn" type="text"
+										placeholder="RPN...">
+								</div>
+							</div> -->
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">FA(%) :</div>
+								<div style="flex: 1;">
+									<input class="numberValidation" id="fa" placeholder="FA..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">PoD(%) :</div>
+								<div style="flex: 1;">
+									<input class="numberValidation" id="pod" placeholder="PoD..." type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Remark :</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="remark" type="text"
+										placeholder="Remark...">
+								</div>
+							</div>
+						</div>
+						<div style="flex: 1;">
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Platform<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="analyticPlatform">
+										<option value="" hidden />
+										<option ng-repeat="data in analyticPlatformData" value="{{data}}">{{data}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Source<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="analyticSources">
+										<option value="" hidden />
+										<option ng-repeat="data in analyticSources" value="{{data}}">{{data}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">
+									Analytic Readiness<span style="color: red;">*</span> :
+								</div>
+								<div style="flex: 1;">
+									<select id="analyticReadiness">
+										<option value="" hidden />
+										<option ng-repeat="data in analyticReadinessData" value="{{data}}">{{data}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Analytic Techniques :</div>
+								<div style="flex: 1;">
+									<select id="analyticTechniques">
+										<option value="" hidden />
+										<option ng-repeat="data in analyticTechniques" value="{{data}}">{{data}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">AWS Status :</div>
+								<div style="flex: 1;">
+									<select id="aws_status">
+										<option value="" hidden />
+										<option value="Not Started">Not Started</option>
+										<option value="In Progress">In Progress</option>
+										<option value="Completed">Completed</option>
+									</select>
+								</div>
+							</div>
+							<!-- <div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">NERC Failure Code :</div>
+								<div style="flex: 1;">
+									<select id="nercCode"
+										onchange="angular.element(document.getElementById('nercCode')).scope().onChangenercCode()">
+										<option value="" hidden />
+										<option ng-repeat="nercCode in nercCode"
+											value="{{nercCode.failureName}}">{{nercCode.failureName}}</option>
+									</select>
+								</div>
+							</div> -->
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Predix Readiness :</div>
+								<div style="flex: 1; padding-top: 8px;">
+									<span style="margin-right: 7%; margin-left: 2%;"><input
+										name="prdeixReadiness" ng-model='prdeixReadinessValue' type="radio" value="yes">&nbsp&nbspYes</span>
+									<span><input name="prdeixReadiness" ng-model='prdeixReadinessValue' type="radio" value="no">&nbsp&nbspNo</span>
+								</div>
+							</div>
+				
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Coverage Flag :</div>
+								<div style="flex: 1; padding-top: 8px;">
+									<span style="margin-right: 7%; margin-left: 2%;"><input
+										class="coverageFlag" id="coverageAPMYes" name="coverageFlagAPM"
+										value="yes" type="radio" ng-model='coverageFlagValue'>&nbsp&nbspYes</span> <span><input
+										 ng-model='coverageFlagValue' class="coverageFlag" name="coverageFlagAPM"
+										value="no" type="radio">&nbsp&nbspNo</span>
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Lead Time :</div>
+								<div style="flex: 1;">
+									<input class="numberValidation" id="leadTime" placeholder="Lead Time..."
+										type="text">
+								</div>
+							</div>
+							<div class="singleElementPad" style="display: flex;">
+								<div class="title" style="flex: 0.6;">Analytic Outcome :</div>
+								<div style="flex: 1;">
+									<input class="validationField" id="analyticOutcome"
+										placeholder="Analytic Outcome..." type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="singleElementPad" style="display: flex;">
+						<div class="title"
+							style="flex: 0.23; padding-left: 20px; padding-top: 10px;">
+							NERC Failure Code :
+						</div>
+						<div style="flex: 1;">
+							<select id="nercCode" class="chosen-select" multiple
+								data-placeholder="Choose a Failure Code" style=""
+								tabindex="4">
+								<option value=""></option>
+								<option ng-repeat="data in nercCode"
+									value="{{data.failureId}}">{{data.failureName}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="singleElementPad" style="display: flex;">
+						<div class="title"
+							style="flex: 0.23; padding-left: 20px; padding-top: 10px;">
+							Analytic Application <span style="color: red;">*</span> :
+						</div>
+						<div style="flex: 1;">
+							<select id="analyticApplication" class="chosen-select" multiple
+								data-placeholder="Choose a Analytic Application" style=""
+								tabindex="4">
+								<option value=""></option>
+								<option ng-repeat="data in analyticApplication"
+									value="{{data.name}}">{{data.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="singleElementPad"
+						style="display: flex; border-bottom: 1px solid #d1d0d8;">
+						<div class="title"
+							style="flex: 0.23; padding-left: 20px; padding-top: 10px;">Analytic
+							Input Tags :</div>
+						<div style="flex: 1;">
+							<select id="inputTag" class="chosen-select" multiple
+								data-placeholder="Choose a Input Tag" style="" tabindex="4">
+								<option value=""></option>
+								<option ng-repeat="data in analyticInputTag" value="{{data.name}}">{{data.name}}</option>
+							</select>
+						</div>
+					</div>
+				
+					<div class="submitButtonDiv">
+						<div style="padding-right: 2%;">
+							<button id="analyticSubmit" ng-click="analyticSubmit()"
+								class="submitButton">
+								<i style="padding-right: 5%" class="fa fa-floppy-o"
+									aria-hidden="true"></i>Submit
+							</button>
+						</div>
+						<div>
+							<button ng-click="resetData()" class="resetButton">
+								<i style="padding-right: 5%" class="fa fa-refresh"
+									aria-hidden="true"></i>Reset
+							</button>
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+  	  </div>
+	</div>
+	<!-- <div class="panel-group" id="searchAccordion">
+    	<div class="panel panel-default">
+        <div class="panel-heading">
+             <h4 id="search-result-tab"
+             	 class="panel-title"
+                 data-toggle="collapse" 
+                 data-target="#search-result">
+               	 Search Result
+             </h4>
+        </div>
+        <div id="search-result" class="panel-collapse collapse">
+            <div class="panel-body">
+             <div ui-if="gridOptions.data.length>0" ng-show="showTable" ui-grid="gridOptions" ui-grid-auto-resize style="height: {{gridHeight}}px" id="suggestion-update" class="grid1"></div>
+            </div>
+        </div>
+  	  </div>
+	</div> -->
+	 
+</div>
+
+<div class="modal fade" id="apmModal" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Upload to APM Status</h4>
+			</div>
+			<div class="modal-body">
+				<div style="padding-bottom: 4%;" ng-show="successDiv">
+					<label class="successLabel">Success</label>
+					<div ui-if="success.data.length>0" ui-grid="successBox" ui-grid-auto-resize class="success"></div>
+				</div>
+				<div ng-show="failureDiv">
+					<label class="failureLabel">Failure</label>
+					<div ui-if="failure.data.length>0" ui-grid="failure" ui-grid-auto-resize class="failure"></div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal fade" id="analyticSuggestion" role="dialog">
+    <div class="modal-dialog modal-lg">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Analytic Details</h4>
+        </div>
+        <div class="modal-body">
+         <div ui-grid="gridOptions" ui-grid-auto-resize style="height: {{gridHeight}}px" id="suggestion-add" class="grid1"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

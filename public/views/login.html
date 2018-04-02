@@ -1,0 +1,29 @@
+<style>
+.btn{
+font-size: 18px;
+}
+
+</style>
+<div class="overlay" >
+	<div class="loginpopup animate" style="display: block;">
+		<div class="popup-head">
+			<span>Login</span>
+		</div>
+		<div class="popup-content">
+			<form name="loginform"  ng-submit="login()" novalidate>
+				<div class="p15">
+					<label><b>Username*</b></label>
+					<input type="text" name="name" autocomplete="off" ng-focus="error=false" placeholder="Enter Username" ng-model="userDetails.uname" ng-pattern="/^[a-zA-Z_0-9]*$/"  required>
+					<p ng-show="loginform.name.$invalid && !loginform.name.$pristine && loginform.name.$error.pattern" class="error-para">Only &nbsp; 'A-Z a-z 0-9 _' &nbsp; are allowed.</p>
+					
+					<label style="padding-top: 15px"><b>Password*</b></label>
+					 <input type="password" name="password" ng-focus="error=false" placeholder="Enter Password"  ng-model="userDetails.psw" required>
+					<p ng-show="error" class="login-error"><i class="fa fa-user-times" aria-hidden="true"></i> username or password is incorrect</p>
+					<button type="submit" ng-disabled="checkDetails()" class="btn btn-success" >Login</button>
+					<!-- <input type="checkbox" checked="checked" ng-model="saveCredentials" ng-init="saveCredentials=true"> -->
+					<!-- <span ng-click="saveCredentials=!saveCredentials" class="pointerSelect">Remember me</span> -->
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

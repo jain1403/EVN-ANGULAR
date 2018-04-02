@@ -1,0 +1,9 @@
+{
+  "development": {
+    "note": "Local Dev Configuration for Tag Mapping",
+    "appURL": "http://ec2-52-25-199-162.us-west-2.compute.amazonaws.com:9000",
+    "clientId": "machine_client",
+    "uaaURL": "https://eb0e9076-8232-4721-a919-315cbb73ba83.predix-uaa.run.aws-usw02-pr.ice.predix.io",
+    "base64ClientCredential": "bWFjaGluZV9jbGllbnQ6cEBzc3dvcmQ="
+  }
+}

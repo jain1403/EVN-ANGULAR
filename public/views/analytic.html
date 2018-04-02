@@ -1,0 +1,52 @@
+<section id="analytic">
+    <div class="det-overview">
+    	<p class="centered-button">
+    		<a ui-sref="catalog"><button class="ge-button -fill--outline -color--gray -size--small">RETURN TO CATALOG</button></a>
+    		<!-- <a ui-sref="workbench"><button class="ge-button -fill--outline -color--blue -size--small">EDIT IN WORKBENCH</button></a> -->
+    	</p>
+    	<div class="det-overview-left">
+    		<p class="det-overview-name">{{analyticdata.catalog_analytic_name}}</p>
+            <p class="det-overview-breadcrumbs">{{analyticdata.fuel_name}} > {{analyticdata.asset_name}} > {{analyticdata.system_name}}</p>
+    		<p class="det-overview-description">
+    			{{analyticdata.analytic_description}}
+				</p>
+    	</div>
+    	<div class="det-overview-right">
+            <p class="det-failure-title">Failure Mode Coverage</p>
+    		<p class="det-failure-info">Failure: {{nercdata.failureName}}</p>
+			<p class="det-failure-info">Failure ID: {{nercdata.failureId}}</p>
+			<p class="det-failure-info">NERC Code: {{analyticdata.nerc_cause_code}}</p>
+            <br>
+            <p class="det-failure-title">Documentation</p>
+            <p class="det-failure-info"><a href="{{analyticdata.analytic_technical_document_link}}">Technical Documentation</a></p>
+            <p class="det-failure-info"><a href="{{analyticdata.analytic_marketing_document_link}}">Marketing Material</a></p>
+    	</div>
+    </div>
+    <div class="det-in-out">
+		<div class="det-cont-wrap">
+			<div class="det-input">
+				<p class="in-out-title">Input</p>
+                <p class="in-out-description">Soon you can enter data and test this analytic in real time.</p>
+                <div class="in-out-area">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a role="buton">Data</a></li>
+                    </ul>
+    				<div ui-ace class="ge-text-area"></div>
+                </div>
+                <p class="centered-button"><button class="ge-button -fill--solid -color--blue" id="run-analytic-button">RUN ANALYTIC</button> <span style="color:#FFF; font-style: italic;">Coming Soon!</span></p>
+			</div>
+			<div class="det-output">
+				<p class="in-out-title">Output</p>
+                <p class="in-out-description">Visualize your data and start getting insights.</p>
+                <div class="in-out-area">
+    				<ul class="nav nav-tabs">
+    					<li ng-class="{active : tab == 1}"><a role="buton" ng-click="setTab(1)">Data</a></li>
+    					<li ng-class="{active : tab == 2}"><a role="buton" ng-click="setTab(2)">Graph</a></li>
+    				</ul>
+    				<div ng-show="isSet(1)" ui-ace="{mode: 'json'}" ng-model="analyticdata" class="ge-text-area"></div>
+    				<img ng-show="isSet(2)" src="/images/graph.jpeg">
+                </div>
+			</div>
+		</div>
+    </div>
+</section>
